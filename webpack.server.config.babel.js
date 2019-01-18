@@ -6,7 +6,7 @@ let serverConfig = {
     server: './src/server/server.js',
   },
   output: {
-    path: resolve(__dirname, 'dist', 'server'),
+    path: resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
   target: 'node',
