@@ -1,0 +1,21 @@
+{
+  "name": "phaser-colyseus-webpack-es6",
+  "version": "1.0.0",
+  "description": "Phaser3 with Colyseus v0.9 and webpack4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git@github.com:calvinchengx/phaser-colyseus-webpack-es6.git",
+  "author": "Calvin Cheng",
+  "license": "MIT",
+  "dependencies": {
+    "colyseus": "^0.9.26",
+    "phaser": "^3.15.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
