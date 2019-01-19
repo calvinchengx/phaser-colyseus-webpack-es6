@@ -1,4 +1,6 @@
 import { resolve } from 'path'
+import webpack from 'webpack'
+import HtmlWebPackPlugin from 'html-webpack-plugin'
 
 let clientConfig = {
   entry: {
@@ -33,7 +35,17 @@ let clientConfig = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/client/index.html",
+      filename: "./index.html"
+    }),
+    new webpack.DefinePlugin({
+      CANVAS_RENDERER: JSON.stringify(true),
+      WEBGL_RENDERER: JSON.stringify(true)
+    })
+  ]
 }
 
 export default clientConfig
