@@ -18,18 +18,9 @@ class MainScene extends Scene {
     console.log(room)
 
     // use room to handle state and changes
-    // room.onJoin.add((client) => {
-    //   console.log("client joined successfully");
-    //   console.log(client) // Is null
-    // })
-    //
-    // room.onLeave.add(function() {
-    //   console.log("client left the room");
-    // });
-
     room.listen("players/:id", ({ path: { id }, operation, value }) => {
       if (operation === "add") {
-        console.log("add new player")
+        console.log("client joins room")
         this.avatars[id] = this.add.image(value.x, value.y, "avatar");
       }
       if (operation === "remove") {
@@ -38,12 +29,14 @@ class MainScene extends Scene {
       }
     });
 
+    // This is to render the changes from the server to display to the user
     room.listen("players/:id/:attribute", ({ path: { id, attribute }, value, operation }) => {
       if (operation === "replace") {
         this.avatars[id][attribute] = value;
       }
     });
 
+    // This is to send the user's movements/input to the server
     this.input.on("pointermove", ({ x, y }) => {
       room.send({ action: "mousemove", x, y });
     });

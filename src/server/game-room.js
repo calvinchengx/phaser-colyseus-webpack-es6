@@ -15,6 +15,7 @@ class GameRoom extends Room {
   }
 
   onJoin(client) {
+    console.log(client)
     this.state.players[client.sessionId] = {
       x: 0,
       y: 0
