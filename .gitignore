@@ -84,4 +84,11 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+# Intellij files
+.idea/
+
+# Webpack files
+dist/
+
+
 # End of https://www.gitignore.io/api/node

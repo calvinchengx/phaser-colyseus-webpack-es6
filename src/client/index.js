@@ -5,11 +5,12 @@ const client = new Client('ws://127.0.0.1:3030')
 
 class MainScene extends Scene {
   constructor() {
-    super('mainScene')
+    super({key: 'mainScene'})
+    this.avatars = {}
   }
 
   preload() {
-    // preload assets
+    this.load.image('avatar', './static/avatar.png')
   }
 
   create() {
@@ -17,6 +18,35 @@ class MainScene extends Scene {
     console.log(room)
 
     // use room to handle state and changes
+    // room.onJoin.add((client) => {
+    //   console.log("client joined successfully");
+    //   console.log(client) // Is null
+    // })
+    //
+    // room.onLeave.add(function() {
+    //   console.log("client left the room");
+    // });
+
+    room.listen("players/:id", ({ path: { id }, operation, value }) => {
+      if (operation === "add") {
+        console.log("add new player")
+        this.avatars[id] = this.add.image(value.x, value.y, "avatar");
+      }
+      if (operation === "remove") {
+          console.log("client left the room");
+        this.avatars[id].destroy();
+      }
+    });
+
+    room.listen("players/:id/:attribute", ({ path: { id, attribute }, value, operation }) => {
+      if (operation === "replace") {
+        this.avatars[id][attribute] = value;
+      }
+    });
+
+    this.input.on("pointermove", ({ x, y }) => {
+      room.send({ action: "mousemove", x, y });
+    });
   }
 }
 

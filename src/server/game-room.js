@@ -1,4 +1,4 @@
-import { Room } from "colyseus"
+const Room = require('colyseus').Room
 
 class GameRoom extends Room {
   // this room supports only 4 clients connected
@@ -37,4 +37,5 @@ class GameRoom extends Room {
   }
 }
 
-export default GameRoom
+// export default GameRoom
+module.exports = GameRoom
